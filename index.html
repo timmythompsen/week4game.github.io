@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+  <html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Crystal Collector</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron:700" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/style.css">
+  </head>
+    <body>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="jumbotron banner">
+                <hgroup>
+                  <h1>
+                    Crystal Collector 
+                  </h1>
+                </hgroup>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p> You will be given a rondom number at the start of the game.</p>
+
+            <p>There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score.</p> 
+
+            <p>You win the game by matching your total score to the random number. You lose the game if your total score goes above the random number.</p>
+
+            <p>The value of each crystal is hidden and is randomly generated at the start of each game.</p>
+          </div>
+        </div>
+          <div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <h1 id="random-number">Random Number</h1>
+                    <h1 id="count">count</h1>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <h2 id="wins">Wins: </h2> 
+                    <h2 id="losses">Losses: </h2>                 
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="row">
+            <div class="col-md-12">
+              <img id="crystal1" src="assets/images/crystal1.jpg" alt="HTML5 Icon" style="width:128px;height:128px;">
+              <img id="crystal2" src="assets/images/crystal2.jpg" alt="HTML5 Icon" style="width:128px;height:128px;">
+              <img id="crystal3" src="assets/images/crystal3.jpg" alt="HTML5 Icon" style="width:128px;height:128px;">
+              <img id="crystal4" src="assets/images/crystal4.jpg" alt="HTML5 Icon" style="width:128px;height:128px;">
+            </div>
+          </div>
+          </div>
+      </div>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/javascript/game.js"></script>
+    </body>
+  </html>

@@ -1,114 +1,99 @@
 
-var bands = ["ledzeppelin","acdc", "backstreetboys", "bobmarley", "deadmau5", "linkinpark"];
-
-var bandImages = {
-	linkinpark: "./assets/images/linkinpark.jpg",
-	ledzeppelin: "./assets/images/ledzepp.jpg",
-	acdc: "./assets/images/acdc.jpg",
-	backstreetboys: "./assets/images/backstreet.jpg",
-	bobmarley: "./assets/images/bobmarley.jpg",
-	deadmau5: "./assets/images/deadmau5.jpg",
-};
-
-var gameObj = {
-
-	array:bands,
-    imgmap:bandImages,
-    wins:0,
-    curbandstring:"",
-    currentband:"empty",
-    matchband:[],
-    gamestarted:false,
-    wordguessed:false,
-    guessremaining:15,
-    guessedletters:[],
-    matchlength:0,
+$(document).ready(function() {
     
-    resetGame:function(){
-    	console.log("game reset");
-    	this.matchlength = 0;
-    	this.wordguessed = false;
-    	this.guessremaining = 15;
-    	var arrindex = Math.floor((Math.random() * 6) +1);
-    	this.currentband = this.array[arrindex - 1];
-    	this.curbandstring="";
-    	console.log(arrindex);
-    	console.log(this.currentband);
-    	this.matchband = [];
-    	this.guessedletters = [];
-    	console.log(this.currentband);
-    	for(var i = 0;i < this.currentband.length;i++){
-    		this.matchband.push('_');
-    		this.matchband.push(' ');
-    		this.curbandstring = this.curbandstring + "_";
-    	}
-    	console.log(this.matchband.length);
-    	console.log(this.matchband);
-    	document.getElementById("remainingguess").innerHTML = this.guessremaining;
-        document.getElementById("guessedletters").innerHTML = " ";
-    	document.getElementById("dottedwordarea").innerHTML = this.curbandstring;
-    	document.getElementById("bandimage").src = this.imgmap[this.currentband];
-    },
+	var wins =0;
+	var losses =0;
+	var numGuessed=false;
+	var numToGuess = generate();
+	var count = 0;
+	var crystal1 = crystals();
+	var crystal2 = crystals();
+	var crystal3 = crystals();
+	var crystal4 = crystals();
 
-    gameControl: function(keyPress){
-    	if(this.gamestarted == false){
-	    		this.gamestarted = true;
-	    		this.matchlength = 0;
-          		var arrindex = Math.floor((Math.random() * 7) + 1);
-          		this.currentband = this.array[arrindex];
-          		for(var i =0;i < this.currentband.length;i++)
-          		{
-          			this.matchband.push('_');
-          			this.matchband.push(' ');
-          			this.curbandstring = this.curbandstring + "_";
-          		}
-          		console.log(this.currentband);
-          		console.log(this.matchband.length);
-          		console.log(this.matchband);
-          		document.getElementById("guessedletters").innerHTML = "";
-          		document.getElementById("dottedword").innerHTML = this.curbandstring;
-          		document.getElementById("remguess").innerHTML = this.guessremaining;
-          		document.getElementById("bandimg").src = this.imgmap[this.currentband];
+	
+
+	function generate(){
+		var num = Math.ceil(Math.random()*100);
+		return num;
+	}
+
+	function crystals(){
+		var num = Math.ceil(Math.random()*20);
+		return num;
+	}
+
+	function gameFunction(){
+		wins = 0;
+		losses=0;
+		numGuessed=false;
+		numToGuess = generate();
+		$("#wins").html("Wins: " + wins);
+		$("#losses").html("losses: " + losses);
+		$("#random-number").html("Match this number: " + numToGuess);
+		$("#count").html("Count: " + count);
+		
+		console.log(crystal1)
+		console.log(crystal2)
+		console.log(crystal3)
+		console.log(crystal4)
+		$( "#crystal1" ).click(function() {
+  			count = count + crystal1;
+  			$("#count").html("Count: " + count);
+  			compare();
+		});
+		$( "#crystal2" ).click(function() {
+  			count = count + crystal2;
+  			$("#count").html("Count: " + count);
+  			compare();
+		});
+		$( "#crystal3" ).click(function() {
+  			count = count + crystal3;
+  			$("#count").html("Count: " + count);
+  			compare();
+		});
+		$( "#crystal4" ).click(function() {
+  			count = count + crystal4;
+  			$("#count").html("Count: " + count);
+  			compare();
+		});
+
+		function compare(){
+			if(count === numToGuess){
+				wins++;
+  				$("#wins").html("Wins: " + wins);
+  				reset();
 			}
-			else{
-				if(this.guessedletters.indexOf(keyPress) == -1){
-						this.guessedletters.push(keyPress);
-						this.guessremaining = this.guessremaining -1;
-						this.displayguessedLetter(keyPress);				
-					
-					var text="";
-					if( this.currentband.indexOf(keyPress) != -1){
-						console.log("key match found:  " + keyPress);
-						console.log(text);
-						for(var i=0;i < this.currentband.length ;i++){
-							if(this.currentband[i] == keyPress){
-								console.log(this.currentband[i] + "  :"  + i + keyhit)
-							    this.matchband[i*2] = keyPress;
-							    this.matchlength = this.matchlength + 1;
-							}
-						}
-						for (var i=0;i < this.matchband.length;i++){
-							text = text + this.matchband[i]
-						}
-						console.log(this.matchband);
-						document.getElementById("dottedword").innerHTML = text;
-						if (this.currentband.length == this.matchlength){
-							this.wins = this.wins +1;
-							this.wordguessed = true;
-							document.getElementById("wins").innerHTML = "Wins: " + this.wins;
-							
-    					}
-    					if(this.guessremaining == 0 || this.wordguessed == true){
-						console.log("noguess remaning reset");
-						this.resetGame();
-    					}
-				}
+			else if(count > numToGuess){
+				losses++;
+  				$("#losses").html("losses: " + losses);
+  				reset();
 			}
 		}
-	}
-}
 
-	document.onkeyup = function(event){
-    var key = event.key;
-   	gameObj.gameControl(key);
-	};
+		function reset(){
+			count = 0;
+			numGuessed=false;
+			numToGuess = generate();
+			$("#wins").html("Wins: " + wins);
+			$("#losses").html("losses: " + losses);
+			$("#random-number").html("Match this number: " + numToGuess);
+			$("#count").html("Count: " + count);
+			crystal1 = crystals();
+			crystal2 = crystals();
+			crystal3 = crystals();
+			crystal4 = crystals();
+		}
+
+	}
+
+	gameFunction();
+	
+
+});
+	
+
+
+
+
+

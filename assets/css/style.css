@@ -1,0 +1,23 @@
+div {
+        color: black;
+        background-color: white;
+        border: 1px;
+        border-color: black;
+        text-align: center;
+        
+      }
+      .jumbotron {
+        background-image: url(http://wide-wallpapers.net/wp-content/uploads/walls/thumbs/Abstract-Design4-600x375.jpg);
+        background-color: #17234E;
+        min-height: 50%;
+        background-repeat: no-repeat;
+        background-position: center;
+        -webkit-background-size: cover;
+      
+      }
+
+      hgroup{
+        color : Black;
+        font-family: 'Orbitron', sans-serif;
+
+      }
